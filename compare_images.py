@@ -4,24 +4,42 @@ import numpy as np
 import sys
 
 
+### GLOBAL VARIABLES
+#
+# Text and Rectangle
+FONT = cv2.FONT_HERSHEY_SIMPLEX
+FONT_X, FONT_Y, FONT_WIDTH, FONT_HEIGHT = 0, 0, 500, 160
+FONT_SCALE = 3
+FONT_THICKNESS = 3
+FONT_COLOR = (255, 255, 255)
+RECTANGLE_BACKGROUND_COLOR = (50, 50, 50)
+CUSTOM_OVERLAY_WIDTH = 1300
+CUSTOM_MASK_WIDTH = 360
+# Overlay
+OVERLAY_COLOR = (0, 0, 255)
+
+
 def show_all_images(img1, img2, mask, overlay, change_text):
-    font = cv2.FONT_HERSHEY_SIMPLEX
-    org = (50, 50)
-    fontScale = 2
-    color = (255, 255, 0)
-    thickness = 2
+    # Black Rectangle
+    cv2.rectangle(img1, (FONT_X, FONT_X), (FONT_X + FONT_WIDTH, FONT_Y + FONT_HEIGHT), RECTANGLE_BACKGROUND_COLOR, -1)
+    cv2.rectangle(img2, (FONT_X, FONT_X), (FONT_X + FONT_WIDTH, FONT_Y + FONT_HEIGHT), RECTANGLE_BACKGROUND_COLOR, -1)
+    cv2.rectangle(mask, (FONT_X, FONT_X), (FONT_X + CUSTOM_MASK_WIDTH, FONT_Y + FONT_HEIGHT), RECTANGLE_BACKGROUND_COLOR, -1)
+    cv2.rectangle(overlay, (FONT_X, FONT_X), (FONT_X + CUSTOM_OVERLAY_WIDTH, FONT_Y + FONT_HEIGHT), RECTANGLE_BACKGROUND_COLOR, -1)
 
-    img1 = cv2.putText(img1, 'Image 1', org, font, fontScale, color, thickness, cv2.LINE_AA)
-    img2 = cv2.putText(img2, 'Image 2', org, font, fontScale, color, thickness, cv2.LINE_AA)
-    mask = cv2.putText(mask, 'Mask', org, font, fontScale, color, thickness, cv2.LINE_AA)
-    overlay = cv2.putText(overlay, "Change: " + change_text, org, font, fontScale, color, thickness, cv2.LINE_AA)
+    # Text
+    img1 = cv2.putText(img1, 'Image 1', (FONT_X + int(FONT_WIDTH/10),FONT_Y + int(FONT_HEIGHT/2)), FONT, FONT_SCALE, FONT_COLOR, FONT_THICKNESS, cv2.LINE_AA)
+    img2 = cv2.putText(img2, 'Image 2', (FONT_X + int(FONT_WIDTH/10),FONT_Y + int(FONT_HEIGHT/2)), FONT, FONT_SCALE, FONT_COLOR, FONT_THICKNESS, cv2.LINE_AA)
+    mask = cv2.putText(mask, 'Mask', (FONT_X + int(CUSTOM_MASK_WIDTH/10),FONT_Y + int(FONT_HEIGHT/2)), FONT, FONT_SCALE, FONT_COLOR, FONT_THICKNESS, cv2.LINE_AA)
+    overlay = cv2.putText(overlay, "Change (Red): " + change_text, (FONT_X + int(CUSTOM_OVERLAY_WIDTH/10),FONT_Y + int(FONT_HEIGHT/2)), FONT, FONT_SCALE, FONT_COLOR, FONT_THICKNESS, cv2.LINE_AA)
 
+    # Concatenate all images into one
     mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
     hor1 = np.concatenate((img1, img2), axis=1)
     hor2 = np.concatenate((mask, overlay), axis=1)
-    ver = np.concatenate((hor1, hor2), axis=0)
+    vert = np.concatenate((hor1, hor2), axis=0)
+
     cv2.namedWindow("Images", cv2.WINDOW_NORMAL)
-    cv2.imshow("Images", ver)
+    cv2.imshow("Images", vert)
 
 
 def show_image(image, title):
@@ -45,9 +63,9 @@ def calculate_change_percent(mask):
 
 def create_overlay(image, mask):
     overlay = copy.copy(image)
-    overlay[:, :, 0][mask > 0] = 0
-    overlay[:, :, 1][mask > 0] = 0
-    overlay[:, :, 2][mask > 0] = 255
+    overlay[:, :, 0][mask > 0] = OVERLAY_COLOR[0]
+    overlay[:, :, 1][mask > 0] = OVERLAY_COLOR[1]
+    overlay[:, :, 2][mask > 0] = OVERLAY_COLOR[2]
     return overlay
 
 

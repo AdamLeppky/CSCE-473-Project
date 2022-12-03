@@ -15,7 +15,7 @@ def print_information(mask):
     print(f"White: {white_count}")
     print(f"Other: {other_count}")
     print(f"Total: {total_count}")
-    print("{:.2%}".format(white_count / total_count))
+    print("Change: {:.2%}".format(white_count / total_count))
 
 
 

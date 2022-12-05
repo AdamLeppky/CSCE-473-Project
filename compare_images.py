@@ -8,29 +8,31 @@ import sys
 #
 # Text and Rectangle
 FONT = cv2.FONT_HERSHEY_SIMPLEX
-FONT_X, FONT_Y, FONT_WIDTH, FONT_HEIGHT = 0, 0, 500, 160
-FONT_SCALE = 3
-FONT_THICKNESS = 3
+FONT_X, FONT_Y, FONT_WIDTH, FONT_HEIGHT = 0, 0, 250, 80
+FONT_SCALE = 1
+FONT_THICKNESS = 2
 FONT_COLOR = (255, 255, 255)
 RECTANGLE_BACKGROUND_COLOR = (50, 50, 50)
-CUSTOM_OVERLAY_WIDTH = 1300
-CUSTOM_MASK_WIDTH = 360
+CUSTOM_OVERLAY_WIDTH = 500
+CUSTOM_MASK_WIDTH = 180
 # Overlay
 OVERLAY_COLOR = (0, 0, 255)
+SHOW_TEXT_ON_OVERLAY = True
 
 
 def show_all_images(img1, img2, mask, overlay, change_text):
-    # Black Rectangle
-    cv2.rectangle(img1, (FONT_X, FONT_X), (FONT_X + FONT_WIDTH, FONT_Y + FONT_HEIGHT), RECTANGLE_BACKGROUND_COLOR, -1)
-    cv2.rectangle(img2, (FONT_X, FONT_X), (FONT_X + FONT_WIDTH, FONT_Y + FONT_HEIGHT), RECTANGLE_BACKGROUND_COLOR, -1)
-    cv2.rectangle(mask, (FONT_X, FONT_X), (FONT_X + CUSTOM_MASK_WIDTH, FONT_Y + FONT_HEIGHT), RECTANGLE_BACKGROUND_COLOR, -1)
-    cv2.rectangle(overlay, (FONT_X, FONT_X), (FONT_X + CUSTOM_OVERLAY_WIDTH, FONT_Y + FONT_HEIGHT), RECTANGLE_BACKGROUND_COLOR, -1)
+    if SHOW_TEXT_ON_OVERLAY:
+        # Black Rectangle
+        cv2.rectangle(img1, (FONT_X, FONT_X), (FONT_X + FONT_WIDTH, FONT_Y + FONT_HEIGHT), RECTANGLE_BACKGROUND_COLOR, -1)
+        cv2.rectangle(img2, (FONT_X, FONT_X), (FONT_X + FONT_WIDTH, FONT_Y + FONT_HEIGHT), RECTANGLE_BACKGROUND_COLOR, -1)
+        cv2.rectangle(mask, (FONT_X, FONT_X), (FONT_X + CUSTOM_MASK_WIDTH, FONT_Y + FONT_HEIGHT), RECTANGLE_BACKGROUND_COLOR, -1)
+        cv2.rectangle(overlay, (FONT_X, FONT_X), (FONT_X + CUSTOM_OVERLAY_WIDTH, FONT_Y + FONT_HEIGHT), RECTANGLE_BACKGROUND_COLOR, -1)
 
-    # Text
-    img1 = cv2.putText(img1, 'Image 1', (FONT_X + int(FONT_WIDTH/10),FONT_Y + int(FONT_HEIGHT/2)), FONT, FONT_SCALE, FONT_COLOR, FONT_THICKNESS, cv2.LINE_AA)
-    img2 = cv2.putText(img2, 'Image 2', (FONT_X + int(FONT_WIDTH/10),FONT_Y + int(FONT_HEIGHT/2)), FONT, FONT_SCALE, FONT_COLOR, FONT_THICKNESS, cv2.LINE_AA)
-    mask = cv2.putText(mask, 'Mask', (FONT_X + int(CUSTOM_MASK_WIDTH/10),FONT_Y + int(FONT_HEIGHT/2)), FONT, FONT_SCALE, FONT_COLOR, FONT_THICKNESS, cv2.LINE_AA)
-    overlay = cv2.putText(overlay, "Change (Red): " + change_text, (FONT_X + int(CUSTOM_OVERLAY_WIDTH/10),FONT_Y + int(FONT_HEIGHT/2)), FONT, FONT_SCALE, FONT_COLOR, FONT_THICKNESS, cv2.LINE_AA)
+        # Text
+        img1 = cv2.putText(img1, 'Image 1', (FONT_X + int(FONT_WIDTH/10),FONT_Y + int(FONT_HEIGHT/2)), FONT, FONT_SCALE, FONT_COLOR, FONT_THICKNESS, cv2.LINE_AA)
+        img2 = cv2.putText(img2, 'Image 2', (FONT_X + int(FONT_WIDTH/10),FONT_Y + int(FONT_HEIGHT/2)), FONT, FONT_SCALE, FONT_COLOR, FONT_THICKNESS, cv2.LINE_AA)
+        mask = cv2.putText(mask, 'Mask', (FONT_X + int(CUSTOM_MASK_WIDTH/10),FONT_Y + int(FONT_HEIGHT/2)), FONT, FONT_SCALE, FONT_COLOR, FONT_THICKNESS, cv2.LINE_AA)
+        overlay = cv2.putText(overlay, "Change (Red): " + change_text, (FONT_X + int(CUSTOM_OVERLAY_WIDTH/10),FONT_Y + int(FONT_HEIGHT/2)), FONT, FONT_SCALE, FONT_COLOR, FONT_THICKNESS, cv2.LINE_AA)
 
     # Concatenate all images into one
     mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
@@ -78,19 +80,26 @@ def create_mask(img1, img2):
 
 
 def main():
-    if len(sys.argv) != 3:
-        print("Requires exactly two image paths as input.")
+    if len(sys.argv) not in [3, 4]:
+        print("Requires two or three image paths as input.")
         return
     
     img1 = cv2.imread(sys.argv[1])
     img2 = cv2.imread(sys.argv[2])
-
     if img1 is None or img2 is None:
         print("Images don't exist.")
         return
+    
+    if len(sys.argv) == 4:
+        original_image = cv2.imread(sys.argv[3])
+    else:
+        original_image = None
 
     mask = create_mask(img1, img2)
-    overlay = create_overlay(img1, mask)
+    if original_image is None:
+        overlay = create_overlay(img1, mask)
+    else:
+        overlay = create_overlay(original_image, mask)
 
     change = calculate_change_percent(mask)
     print(change)
@@ -99,11 +108,6 @@ def main():
     img2 = cv2.resize(img2, (width, height))
     mask = cv2.resize(mask, (width, height))
     overlay = cv2.resize(overlay, (width, height))
-
-    print(img1.shape)
-    print(img2.shape)
-    print(mask.shape)
-    print(overlay.shape)
 
     # show_image(img1, "img1")
     # show_image(img2, "img2")

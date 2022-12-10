@@ -7,6 +7,14 @@ CSCE-473 Computer Vision Final Project - Fall 2022
 - Peter Cao
 - John Cerny
 
+## DeepLabV3 Model
+
+TODO
+
+## U-Net Model
+
+TODO
+
 ## Visualizing Changes in Water Area
 Given two satellite image masks produced by the DeepLabV3 model, calculate the difference and visualize it.
 

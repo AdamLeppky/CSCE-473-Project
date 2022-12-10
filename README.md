@@ -24,6 +24,10 @@ Given two satellite image masks produced by the DeepLabV3 model, calculate the d
 
 <img src="https://user-images.githubusercontent.com/13823591/206872607-ed775706-0aac-40e2-81dd-5ab472327aba.png" width="300"> <img src="https://user-images.githubusercontent.com/13823591/206872608-52351bcf-e6ec-4d5d-bb6d-35a33721a601.png" width="300">
 
+### Dependencies:
+- [opencv-python](https://pypi.org/project/opencv-python/)
+- [numpy](https://numpy.org/)
+
 ### Instructions
 This example uses the following images you can try:
 - Original Satellite Image from 2005: `examplesImages\1-2005.png`

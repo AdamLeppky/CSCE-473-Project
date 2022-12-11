@@ -37,8 +37,8 @@ This example uses the following images you can try:
 
 How to Run:
 - To run with a visualization overlay on one of the masks, run:
-  - `python CompareImages\compare_images.py examplesImages\1-2005.png examplesImages\1-2021.png`
+  - `python CompareImages\compare_images.py CompareImages\example\1-2005.png CompareImages\example\1-2021.png`
   - The two arguments are the paths to the mask images.
 - To run with a visualization overlay on one of the original satellite images, run:
-  - `python CompareImages\compare_images.py examplesImages\1-2005.png examplesImages\1-2021.png examplesImages\1-2005.png`
+  - `python CompareImages\compare_images.py CompareImages\example\1-2005.png CompareImages\example\1-2021.png CompareImages\example\1-2005.png`
   - The first two arguments are the paths to the mask images. The third argument is the original image for which the overlay will be added.

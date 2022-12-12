@@ -31,7 +31,7 @@ CSCE-473 Computer Vision Final Project - Fall 2022
 [DeepGlobe Land Cover Classification [DeepLabV3+]](https://www.kaggle.com/code/balraj98/deepglobe-land-cover-classification-deeplabv3/notebook)
  Author: Balraj Ashwath
 
-###Instructions to run [DeepLabV3 notebook](https://github.com/AdamLeppky/CSCE-473-Project/blob/main/DeepLabV3/deepglobe-land-cover-classification-deeplabv3.ipynb)
+### Instructions to run [DeepLabV3 notebook](https://github.com/AdamLeppky/CSCE-473-Project/blob/main/DeepLabV3/deepglobe-land-cover-classification-deeplabv3.ipynb)
 
 1. Install [DeepGlobe Land Cover Classification Dataset](https://www.kaggle.com/datasets/balraj98/deepglobe-land-cover-classification-dataset) zip file in [DeepLabV3](https://github.com/AdamLeppky/CSCE-473-Project/tree/main/DeepLabV3) directory
 2. Run the bash script file [datasetSetup.sh](https://github.com/AdamLeppky/CSCE-473-Project/blob/main/DeepLabV3/datasetSetup.sh)
@@ -47,7 +47,8 @@ CSCE-473 Computer Vision Final Project - Fall 2022
 ### Notebook Citation
 [notebooka5d51c716d](https://www.kaggle.com/code/animeshganai/notebooka5d51c716d)
  Author: Animesh Ganai
-###Instructions to run [U-Net notebook](https://github.com/AdamLeppky/CSCE-473-Project/blob/main/UNet%20Model/UNet_Notebook.ipynb)
+
+### Instructions to run [U-Net notebook](https://github.com/AdamLeppky/CSCE-473-Project/blob/main/UNet%20Model/UNet_Notebook.ipynb)
 
 1. Install [Semantic Segmentation of Aerial Imagery](https://www.kaggle.com/datasets/humansintheloop/semantic-segmentation-of-aerial-imagery)
 2. Run the bashs script file [datasetSetup.sh](https://github.com/AdamLeppky/CSCE-473-Project/blob/main/UNet%20Model/datasetSetup.sh)

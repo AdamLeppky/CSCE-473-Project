@@ -23,6 +23,7 @@ CSCE-473 Computer Vision Final Project - Fall 2022
 - Segmentation_models_pytorch 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `!pip install -q -U segmentation-models-pytorch albumentations`
 
 ## DeepLabV3 Model
+
 ### Dataset
 [DeepGlobe Land Cover Classification Dataset](https://www.kaggle.com/datasets/balraj98/deepglobe-land-cover-classification-dataset)
 
@@ -32,7 +33,12 @@ CSCE-473 Computer Vision Final Project - Fall 2022
 
 ## U-Net Model
 
-TODO
+### Dataset
+[Semantic Segmentation of Aerial Imagery](https://www.kaggle.com/datasets/humansintheloop/semantic-segmentation-of-aerial-imagery)
+
+### Notebook Citation
+[notebooka5d51c716d](https://www.kaggle.com/code/animeshganai/notebooka5d51c716d)
+ Author: Animesh Ganai
 
 ## Visualizing Changes in Water Area
 Given two satellite image masks produced by the DeepLabV3 model, calculate the difference and visualize it.

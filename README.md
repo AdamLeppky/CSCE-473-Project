@@ -8,10 +8,10 @@ CSCE-473 Computer Vision Final Project - Fall 2022
 - John Cerny
 
 ## DeepLabV3 Model
-###Dataset
+### Dataset
 [DeepGlobe Land Cover Classification Dataset](https://www.kaggle.com/datasets/balraj98/deepglobe-land-cover-classification-dataset)
 
-###Notebook Citation
+### Notebook Citation
 [DeepGlobe Land Cover Classification [DeepLabV3+]](https://www.kaggle.com/code/balraj98/deepglobe-land-cover-classification-deeplabv3/notebook)
  Author: Balraj Ashwath
 

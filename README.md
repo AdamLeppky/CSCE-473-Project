@@ -37,7 +37,7 @@ Given two satellite image masks produced by the DeepLabV3 model, calculate the d
 - [Pandas](https://pandas.pydata.org/docs/getting_started/install.html)
 - [Albumentations](https://albumentations.ai/)
 - [Tensorflow](https://www.tensorflow.org/install/pip#linux)
-- [Segmentation_models_pytorch](!pip install -q -U segmentation-models-pytorch albumentations)
+- [Segmentation_models_pytorch] 	!pip install -q -U segmentation-models-pytorch albumentations
 
 
 ### Instructions
